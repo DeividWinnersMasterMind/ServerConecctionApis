@@ -29,6 +29,7 @@ app.post('/registro', (req, res) => {
         .then(data => {
             /*  console.log('Respuesta del servidor:', data); */
             console.log(data)
+            res.json(data);
         })
         .catch(error => {
             console.error('Error al enviar la solicitud:', error);
