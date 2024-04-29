@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const http = require('http');
 
 const app = express();
 
@@ -45,7 +44,7 @@ app.listen(PORT, () => {
 setInterval(() => {
     console.log('Ejecutando la tarea cron...');
     // Realizar una solicitud HTTP a tu propio servidor para mantenerlo activo
-    http.get(PORT, (res) => {
+    app.get(PORT, (res) => {
         console.log(`Solicitud a ${PORT} exitosa. Estado: ${res.statusCode}`);
     }).on('error', (err) => {
         console.error('Error al enviar la solicitud:', err.message);
