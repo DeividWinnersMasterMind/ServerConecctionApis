@@ -45,8 +45,8 @@ app.listen(PORT, () => {
 setInterval(() => {
     console.log('Ejecutando la tarea cron...');
     // Realizar una solicitud HTTP a tu propio servidor para mantenerlo activo
-    http.get(`http://localhost:${PORT}`, (res) => {
-        console.log(`Solicitud a http://localhost:${PORT} exitosa. Estado: ${res.statusCode}`);
+    http.get(PORT, (res) => {
+        console.log(`Solicitud a ${PORT} exitosa. Estado: ${res.statusCode}`);
     }).on('error', (err) => {
         console.error('Error al enviar la solicitud:', err.message);
     });
