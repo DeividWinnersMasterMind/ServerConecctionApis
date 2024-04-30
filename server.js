@@ -12,32 +12,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // Manejador para la ruta '/registro'
-app.post('/registro', (req, res) => {
-    // Recibir y procesar los datos enviados desde el cliente
-    let data = req.body;
+app.post('/registro', async (req, res) => {
+    try {
+        let data = req.body;
 
-    console.log(JSON.stringify(data))
+        console.log(JSON.stringify(data));
 
-    fetch('https://p100-ld.irev.com/api/affiliates/v2/leads', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': '7voitrmdnhitdaftt9j5g84beoyg9axf3'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(data => {
-            /*  console.log('Respuesta del servidor:', data); */
-            console.log(data)
-            res.json(data);
-        })
-        .catch(error => {
-            console.error('Error al enviar la solicitud:', error);
-            res.status(500).send('Error al enviar la solicitud');
+        const response = await fetch('https://p100-ld.irev.com/api/affiliates/v2/leads', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': '7voitrmdnhitdaftt9j5g84beoyg9axf3'
+            },
+            body: JSON.stringify(data)
         });
-});
 
+        const responseData = await response.json();
+
+        console.log(responseData);
+
+        res.json(responseData);
+    } catch (error) {
+        console.error('Error al enviar la solicitud:', error);
+        res.status(500).send('Error al enviar la solicitud');
+    }
+});
 const PORT = 3000
 
 app.listen(3000, () => {
