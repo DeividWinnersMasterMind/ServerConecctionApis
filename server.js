@@ -37,9 +37,9 @@ app.post('/registro', (req, res) => {
         });
 });
 
-const PORT = process.env.PORT
+const PORT = 3000
 
-app.listen(process.env.PORT, () => {
+app.listen(3000, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
 
