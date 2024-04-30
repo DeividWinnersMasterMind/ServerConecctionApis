@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 
 const app = express();
+
 
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,6 +29,7 @@ app.post('/registro', (req, res) => {
         .then(data => {
             /*  console.log('Respuesta del servidor:', data); */
             console.log(data)
+            res.json(data);
         })
         .catch(error => {
             console.error('Error al enviar la solicitud:', error);
@@ -34,19 +37,9 @@ app.post('/registro', (req, res) => {
         });
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
 
-// Programar la tarea cron para enviar una solicitud HTTP cada 45 segundos
-setInterval(() => {
-    console.log('Ejecutando la tarea cron...');
-    // Realizar una solicitud HTTP a tu propio servidor para mantenerlo activo
-    app.get(PORT, (res) => {
-        console.log(`Solicitud a ${PORT} exitosa. Estado: ${res.statusCode}`);
-    }).on('error', (err) => {
-        console.error('Error al enviar la solicitud:', err.message);
-    });
-}, 45000);
