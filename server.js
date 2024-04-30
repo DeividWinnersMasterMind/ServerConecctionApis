@@ -36,5 +36,5 @@ app.post('/registro', (req, res) => {
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
+    console.log(`Servidor escuchando  puerto ${PORT}`);
 });
